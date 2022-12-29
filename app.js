@@ -15,7 +15,10 @@ const technologies = [
     {title: 'React', description: 'React Text', type: 'react', done: true},
 ]
 
-function opendModal() {
+function opendModal(event) {
+    const data = event.target.dataset
+    const tech = technologies.find(t => t.type === data.type)
+    if (!tech) return
     modal.classList.add('open')
 }
 
@@ -52,11 +55,11 @@ function renderProgress() {
     let background;
 
     if (percent <= 30) {
-        background = 'red'
+        background = '#e75a5a'
     } else if (percent > 30 && percent < 70) {
-        background = 'orange'
+        background = '#f99415'
     } else {
-        background ='green'
+        background ='#73ba3c'
     }
 
 
@@ -86,8 +89,8 @@ function toCard(tech) {
 
 
     return `
-    <div class="card ${doneClass}">
-        <h3>${tech.title}</h3>
+    <div class="card ${doneClass}" data-type"${tech.type}">
+        <h3 data-type"${tech.type}">${tech.title}</h3>
     </div>   
     `
 }
